@@ -14,14 +14,32 @@ get('/stores/new') do
   erb(:store_form)
 end
 
+get('/brands/new') do
+  erb(:brand_form)
+end
+
 get('/stores/:id') do
   @store = Store.find(params[:id])
   @brands = @store.brands
   erb(:store)
 end
 
-post('/') do
+get('/brands/:id') do
+  @brand = Brand.find(params[:id])
+  @stores = @brand.stores
+  erb(:brand)
+end
+
+post('/stores') do
   store_name = params.fetch('store_name')
   store = Store.create({name: store_name})
+
+  redirect("/")
+end
+
+post('/brands') do
+  brand_name = params.fetch('brand_name')
+  brand = Brand.create({name: brand_name})
+
   redirect("/")
 end
