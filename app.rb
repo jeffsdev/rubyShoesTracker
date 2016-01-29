@@ -1,3 +1,4 @@
+require('pry')
 require("bundler/setup")
 Bundler.require(:default)
 
@@ -5,8 +6,8 @@ Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 
 get('/') do
-  @brands = Brand.all()
-  @stores = Store.all()
+  @brands = Brand.all().order(:name)
+  @stores = Store.all().order(:name)
   erb(:index)
 end
 
@@ -42,4 +43,27 @@ post('/brands') do
   brand = Brand.create({name: brand_name})
 
   redirect("/")
+end
+
+
+
+
+
+
+
+get('/stores/:id/edit') do
+  @store = Store.find(params[:id])
+  @brands = @store.brands
+  erb(:store_update_form)
+end
+
+
+
+
+patch('/stores/:id') do
+  store = params.fetch('store_name')
+    @brands = Brand.all()
+  @store = Store.find(params.fetch("id").to_i)
+  @store.update({:name => store})
+  erb(:store)
 end

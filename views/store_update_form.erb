@@ -1,0 +1,16 @@
+<h2>update store info</h2>
+
+<form action="/stores/<%= @store.id %>" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <div class="row">
+    <!-- Store Name -->
+    <div class="form-group col-sm-6">
+      <label for="store_name">update store name</label>
+      <input type="text" class="form-control" name="store_name">
+    </div>
+
+  <!-- Submit Button -->
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
