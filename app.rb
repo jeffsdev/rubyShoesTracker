@@ -33,9 +33,20 @@ end
 
 post('/stores') do
   store_name = params.fetch('store_name')
-  store = Store.create({name: store_name})
+  brand_name = params.fetch('brand_names')
+  new_store = Store.create({name: store_name})
+  brand_string = params[:brand_names]
 
-  redirect("/")
+
+  # Validation
+  unless new_store.save
+    @task = new_store
+    @page = '/stores/new'
+    return erb(:errors)
+  end
+
+
+
 end
 
 post('/brands') do
