@@ -45,11 +45,7 @@ post('/brands') do
   redirect("/")
 end
 
-
-
-
-
-
+# Update
 
 get('/stores/:id/edit') do
   @store = Store.find(params[:id])
@@ -57,13 +53,22 @@ get('/stores/:id/edit') do
   erb(:store_update_form)
 end
 
-
-
-
 patch('/stores/:id') do
-  store = params.fetch('store_name')
-    @brands = Brand.all()
+  store_name = params.fetch('store_name')
+  @brands = Brand.all()
   @store = Store.find(params.fetch("id").to_i)
-  @store.update({:name => store})
+  @store.update({name: store_name})
   erb(:store)
+end
+
+# Delete
+
+delete('/stores/:id') do
+  id = params[:id]
+  store = Store.find(id)
+
+  store.brands.delete
+  store.destroy
+
+  redirect('/')
 end
