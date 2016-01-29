@@ -46,6 +46,15 @@ post('/stores') do
   end
 
 
+  # Add store brands
+  new_store.brands.delete_all
+  new_store.brand_string_to_brands(brand_string)
+
+  brand_string = params[:brand_names]
+  new_store.brand_string_to_brands(brand_string)
+
+
+  redirect('/')
 
 end
 
