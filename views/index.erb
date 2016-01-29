@@ -1,0 +1,46 @@
+<div class="jumbotron">
+  <h3>Shoe Tracker</h3>
+</div>
+
+
+<a href="/stores/new">Add a New Store</a>
+
+<hr>
+
+<div class="row">
+  <!-- Stores -->
+  <div class="col-sm-4">
+    <h5>List of Stores</h5>
+    <% if @stores.any? %>
+      <ul>
+        <% @stores.each do |store| %>
+          <li>
+            <a href="/stores/<%= store.id %>">
+              <%= store.name %>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <!-- Brands -->
+  <div class="col-sm-4">
+    <h5>List of Brands</h5>
+    <% if @brands.any? %>
+      <ul>
+        <% @brands.each do |brand| %>
+          <li>
+            <a href="/brands/<%= brand.id %>">
+              <%= brand.name %>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>
