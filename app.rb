@@ -33,27 +33,18 @@ end
 
 post('/stores') do
   store_name = params.fetch('store_name')
-
   new_store = Store.create({name: store_name})
-
-
   # Validation
   unless new_store.save
     @task = new_store
     @page = '/stores/new'
     return erb(:errors)
   end
-
-
   # Add store brands
-
-
   brand_string = params[:brand_names]
   new_store.brand_string_to_brands(brand_string)
 
-
   redirect("/stores/#{new_store.id}")
-
 end
 
 post('/brands') do
@@ -90,7 +81,6 @@ patch('/stores/:id') do
   store.brands.delete_all
   store.brand_string_to_brands(brand_string)
 
-
   redirect("/stores/#{id}")
 end
 
@@ -100,7 +90,7 @@ delete('/stores/:id') do
   id = params[:id]
   store = Store.find(id)
 
-  store.brands.delete
+  store.brands.delete_all
   store.destroy
 
   redirect('/')

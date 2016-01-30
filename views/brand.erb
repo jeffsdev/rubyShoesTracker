@@ -3,7 +3,7 @@
     <h1><%= @brand.name %></h1>
 
 <hr>
-
+  <h3>This brand can be found in these stores:</h3>
     <% if @stores.any? %>
       <ul>
         <% @stores.each do |store| %>
