@@ -6,7 +6,7 @@ Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 
 get('/') do
-  @brands = Brand.all().order(:name)
+  @brands = Brand.order(:name)
   @stores = Store.all().order(:name)
   erb(:index)
 end
@@ -33,9 +33,8 @@ end
 
 post('/stores') do
   store_name = params.fetch('store_name')
-  brand_name = params.fetch('brand_names')
+
   new_store = Store.create({name: store_name})
-  brand_string = params[:brand_names]
 
 
   # Validation
@@ -47,13 +46,13 @@ post('/stores') do
 
 
   # Add store brands
-  new_store.brands.delete_all
+
 
   brand_string = params[:brand_names]
   new_store.brand_string_to_brands(brand_string)
 
 
-  redirect('/')
+  redirect("/stores/#{new_store.id}")
 
 end
 
@@ -92,7 +91,7 @@ patch('/stores/:id') do
   store.brand_string_to_brands(brand_string)
 
 
-  erb(:index)
+  redirect("/stores/#{id}")
 end
 
 # Delete
