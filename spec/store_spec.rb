@@ -11,11 +11,11 @@ describe(Store) do
     expect(test_store.name()).to(eq("Test Shoe Store"))
   end
 
-  it('validates the uniqueness of the name of the tag') do
-    test_store = create_test_store
-    duplicate_store = Store.new({name: "test store"})
-    expect(duplicate_store.save).to(eq(false))
-  end
+  # it('validates the uniqueness of the name of the tag') do
+  #   test_store = create_test_store
+  #   duplicate_store = Store.new({name: "test store"})
+  #   expect(duplicate_store.save).to(eq(false))
+  # end
 
   describe('#tags') do
     it('returns a list of brands assigned to the store') do

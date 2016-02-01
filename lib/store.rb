@@ -1,8 +1,10 @@
+require 'pry'
+
 class Store < ActiveRecord::Base
   has_and_belongs_to_many(:brands)
 
   validates(:name, :presence => true)
-  validates :name, uniqueness: { case_sensitive: false }
+  # validates :name, uniqueness: { case_sensitive: false }
 
   before_save(:capitalize)
 
@@ -14,8 +16,8 @@ class Store < ActiveRecord::Base
       if brand_match.nil?
         self.brands.create(name: brand_name)
       else
-        self.brands << brand_match
-      end
+      self.brands << brand_match
+       end
     end
   end
 
